@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <title>Trill-Play</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body ng-controller="HomeCtrl as controller" >
+  <nav class="#ff9800 orange" role="navigation" id="navbar">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><b>Trill</b>Party</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <!-- navigation-->
+<div class="row">
+  <div id="hostPicture">
+    <div class="card-panel hoverable col s2"  id="hostSetting">
+      <div class="content" >   
+            <div class="col s12 m2" id="partyName">
+            <h2>Party</h2><h5><b>Number:</b>sahas</h5><hr>
+              <div class="collection">
+                <a href="#!" class="collection-item waves-effect">Users<span class="badge"></span></a>
+                <a href="#!" class="collection-item waves-effect">Top 25<span class=""></span></a>
+                <a href="#!" class="collection-item waves-effect">Top Hits</a>
+                <a href="#!" class="collection-item waves-effect">Party Tunes<span class=""></span></a>
+                <a href="#!" class="collection-item waves-effect">Parties in the Area<span class=""></span></a>
+              </div>
+            </div>
+      </div>
+	  </div>
+
+    <div id="spacers"></div>
+    <div class="col s6 push-s4 z-depth-1" id="playlist">
+     <!--List current start -->
+   <ul  class="collection">
+    <li ng-repeat="song in songs" ng-show="$first" class="collection-item avatar" >
+      <div ng-repeat="source in song.sources" id="hide">
+      <img src="{{source.artworkUrl}}" alt="" class="circle">
+      <span class="title">{{source.songName}}</span>
+      <p><b>Artist:</b>{{source.artist}}<br><b>Votes:</b>{{source.votes}} 
+      </p>
+    
+    </li>
+    </ul>
+     <!--List current end-->
+
+      <div class="col s12 responsive-img" style="margin-top: 0px;" id="playing"> 
+      <!--Music Player-->
+      <div id="app">
+<div  class="videogular-container">
+    <videogular vg-player-ready="onPlayerReady($API)" vg-complete="onComplete()"  vg-theme="config.theme.url"  class="videogular-container audio" >
+        <vg-media vg-src="config.sources" vg-type="audio"></vg-media>
+
+        <vg-controls>
+            <vg-play-pause-button></vg-play-pause-button>
+            <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+            <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            </vg-scrub-bar>
+            <vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+            <vg-volume>
+                <vg-mute-button></vg-mute-button>
+            </vg-volume>
+        </vg-controls>
+    </videogular>
+</div>
+</div>
+
+        </div>
+       <div id="songs">
+      <!--List START-->
+
+       <ul  class="collection" >
+    <li  ng-repeat="song in songs" ng-show="!$first" class="collection-item avatar">
+      <div ng-repeat="source in song.sources" id="hide">
+      <img src="{{source.artworkUrl}}" alt="" class="circle">
+      <span class="title">{{source.songName}}</span>
+      <p><b>Artist:</b>{{source.artist}}<br><b>Votes:</b>{{source.votes}} 
+      </p>
+      <a href="#!" class="secondary-content"><i class="fa fa-angle-up fa-3x"></i></a>
+      </div>
+    </li>
+    </ul>
+
+
+    
+
+   <!--List END-->
+       </div>
+    </div>
+    <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large orange darken-2">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="fa fa-arrows-v"></i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="fa fa-minus"></i></a></li>
+    </ul>
+  </div>
+        
+    
+
+</div>  
+    
+ 
+ 
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+     <script src="js/angular.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="http://static.videogular.com/scripts/videogular/latest/videogular.js"></script>
+    <script src="http://static.videogular.com/scripts/controls/latest/vg-controls.js"></script>
+    <script src="js/services.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+  </body>
+</html>
